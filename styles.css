@@ -1,0 +1,496 @@
+/* Importación de fuentes desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
+/* Variables de colores y fuentes */
+:root {
+    --primary: #D23C77;    /* Rosa principal */
+    --secondary: #B399D4;  /* Lila secundario */
+    --white: #FFFFFF;      /* Fondo y texto claro */
+    --black: #333333;      /* Texto oscuro */
+    --font-title: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+/* Reset y estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--black);
+    background-color: var(--white);
+    line-height: 1.6;
+
+    /* Opcional de pruebas 
+    
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; */
+
+}
+
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary);
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+        
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--secondary);
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* Header */
+/* Importación de Font Awesome para el ícono del menú */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* Navbar - Estilos generales */
+.header {
+    background-color: var(--white);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0; /* Elimina padding global */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem; /* Padding interno del contenedor */
+    max-width: 100%; /* Ocupa todo el ancho */
+    margin: 0; /* Elimina margen automático */
+}
+
+.logo-link {
+    display: inline-block; /* Permite ajustes de tamaño */
+    transition: transform 0.2s ease; /* Efecto de "hundirse" */
+}
+
+.logo-link:hover {
+    transform: translateY(2px); /* Efecto al pasar el mouse */
+}
+
+.logo {
+    height: 60px;
+    width: auto;
+}
+
+/* Navbar - Desktop */
+.navbar {
+    display: flex;
+    gap: 2.5rem; /* Más espacio entre enlaces */
+}
+
+.navbar a {
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 1.5rem; /* Texto más grande */
+    text-decoration: none;
+    color: var(--primary);
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: var(--secondary);
+}
+
+/* Botón del menú hamburguesa (oculto en desktop) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/images/imagen-portada.jpg') no-repeat center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+}
+
+/* Hero Section - Título principal */
+.hero h1 {
+    font-family: var(--font-title);
+    font-size: 5rem; /* Más grande y prominente */
+    color: var(--white); /* Blanco para máximo contraste */
+    margin-bottom: 1.5rem;
+    text-shadow: 
+        3px 3px 6px rgba(0, 0, 0, 0.7), /* Sombra oscura para profundidad */
+        0 0 15px rgba(179, 153, 212, 0.7); /* Glow lila (branding) */
+    letter-spacing: 1.5px;
+    position: relative; /* Para efectos adicionales (opcional) */
+    z-index: 1; /* Asegura que esté sobre el overlay */
+    text-align: center; /* Centrado seguro */
+    padding: 0 1rem; /* Evita que toque bordes en móviles */
+}
+
+
+/* Overlay oscuro para mejorar legibilidad (sobre imagen) */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Ajusta opacidad si es necesario */
+    z-index: 0;
+}
+
+/* Secciones */
+section {
+    padding: 6rem 2rem;
+    min-height: 100vh;
+}
+
+.about-section {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flip-container {
+    perspective: 1500px;
+    width: 100%;
+    max-width: 850px; /* Más ancho */
+    /* height: 420px; Más alto */
+    height: auto; /* Altura flexible */
+    min-height: 420px; /* Altura mínima */
+    aspect-ratio: 3/2; /* Proporción mantenida */
+    margin: 0 auto 3rem;
+    position: relative;
+}
+
+
+/* Flip Card Container */
+
+/* .flip-card-container {
+   perspective: 1200px;
+    width: 100%;
+    max-width: 600px;
+    height: 380px;
+    margin: 0 auto 2rem;
+} */
+        
+.flip-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transform-origin: center center;
+}
+        
+.flip-container:hover .flip-card {
+    transform: rotateY(180deg);
+}
+        
+/* Caras del Flip Card */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow-y: hidden;
+}
+        
+.flip-card-front {
+    background-color: var(--white);
+    background-image: url('assets/images/producto-destacado.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    position: relative;
+    background: linear-gradient(135deg, rgba(210,60,119,0.9) 0%, rgba(179,153,212,0.9) 100%);
+    color: var(--white);
+    z-index: 2;
+}
+       
+.flip-card-front::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+}
+        
+.flip-card-front-content, .flip-card-back-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding: 2.5rem;
+    border-radius: 10px;
+}
+.flip-card-front p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}       
+.flip-card-back {
+    background-color: var(--white);
+    transform: rotateY(180deg);
+    padding: 2.5rem;
+    z-index: 1;
+}
+        
+.flip-card-back h3 {
+    color: var(--primary);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+        
+.flip-card-back ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+        
+.flip-card-back li {
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+        
+.flip-card-back li:before {
+    content: "•";
+    color: var(--secondary);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+}
+        
+.footer-quote {
+    font-style: italic;
+    color: var(--secondary);
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    width: 100%;
+    position: relative;
+    z-index: 0;
+}
+
+/* Productos */
+
+.products {
+    padding: 4rem 2rem;
+    background-color: var(--light-bg);
+}
+.product-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    scroll-snap-type: x mandatory;
+}
+
+.product-card {
+    scroll-snap-align: start;
+    min-width: 250px;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+}
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+.product-card h3 {
+    font-family: var(--font-title);
+    color: var(--secondary);
+    margin: 1rem 0;
+}
+.product-card .price {
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--primary);
+    color: var(--white);
+}
+
+.footer p {
+    font-family: var(--font-title);
+    letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .flip-container {
+    min-height: 320px;
+  }
+  
+  .flip-card-front p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .flip-card-back ul li {
+    font-size: 0.75rem;
+    padding-left: 1.2rem;
+  }
+  
+  .flip-card-back li:before {
+    font-size: 1.2rem;
+    top: -1px;
+  }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .navbar {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        padding: 1rem; /* Reduce padding en móviles */
+    }
+
+    .navbar {
+        position: fixed;
+        top: 80px; /* Ajusta según altura del header */
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px); /* Altura total menos el header */
+        flex-direction: column;
+        gap: 1.5rem;
+        background-color: var(--white);
+        padding: 2rem;
+        box-shadow: none; /* Elimina sombra para limpieza */
+        transition: left 0.3s ease;
+    }
+
+    .navbar.active {
+        left: 0;
+    }
+
+    .navbar a {
+        font-size: 1.5rem; /* Texto más grande */
+        padding: 1rem 0;
+        text-align: center; /* Centra el texto */
+        border-bottom: 1px solid rgba(210, 60, 119, 0.1); /* Separador sutil */
+    }
+    .menu-toggle {
+        display: block; /* Muestra el botón */
+    }
+    .hero h1 {
+        font-size: 2.5rem; /* Tamaño legible en móviles */
+        text-shadow: 
+            2px 2px 4px rgba(0, 0, 0, 0.7),
+            0 0 10px rgba(179, 153, 212, 0.5);
+    }
+    .flip-card-container {
+        height: 500px;
+    }
+    .flip-container {
+        height: 450px;
+        max-width: 90%;
+        min-height: 350px;
+        aspect-ratio: 4/3;
+    }
+  
+    .flip-card-front-content,
+    .flip-card-back {
+        padding: 1.5rem;
+    }
+    .flip-card-back ul{
+        gap: 0.6rem;
+    }
+    .flip-card li {
+        padding-left: 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+}
+
+@media (max-width: 1024px) {
+  .flip-container {
+    min-height: 380px;
+  }
+  
+  .flip-card-front p {
+    font-size: 1rem;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.3rem;
+  }
+  
+  .flip-card-back li {
+    font-size: 0.95rem;
+  }
+}

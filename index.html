@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusión Artesanal</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Importación de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+    <div class="header-container">
+        <a href="#" class="logo-link"> <!-- Envuelve el logo en un enlace -->
+            <img src="assets/images/Fusión_artesanal.png" alt="Logo" class="logo">
+        </a>
+        <nav class="navbar" id="navbar">
+            <a href="#about">Acerca de</a>
+            <a href="#products">Productos</a>
+            <a href="#contact">Contacto</a>
+        </nav>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 12H21" stroke="#D23C77" stroke-width="2" stroke-linecap="round"/>
+        <path d="M3 6H21" stroke="#D23C77" stroke-width="2" stroke-linecap="round"/>
+        <path d="M3 18H21" stroke="#D23C77" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+</button>
+    </div>
+</header>
+
+    <!-- Sección Hero (imagen de fondo pantalla completa) -->
+    <section class="hero">
+        <h1>Bienvenido a Fusión Artesanal</h1>
+    </section>
+
+    <!-- Sección Acerca de -->
+    <section id="about-section">
+        <h1>Acerca de Fusión Artesanal</h1>
+        <h2>Más que productos, creamos experiencias sensoriales</h2>
+        
+        <div class="flip-container">
+            <div class="flip-card">
+                <!-- Cara frontal -->
+                <div class="flip-card-front">
+                    <div class="flip-card-front-content">
+                        <p>En Fusión Artesanal reinventamos la artesanía tradicional combinando cemento, resina y parafina para dar vida a piezas únicas donde los olores, colores y texturas se unen en armonía. Cada artículo está diseñado para cautivar tus sentidos y convertirse en un tesoro cotidiano.</p>
+                    </div>
+                </div>
+                
+                <!-- Cara trasera -->
+                <div class="flip-card-back">
+                    <h3>¿Por qué elegirnos?</h3>
+                    <ul>
+                        <li><strong>Materiales con alma:</strong> Seleccionamos cuidadosamente cada componente para garantizar durabilidad y belleza.</li>
+                        <li><strong>Dedicación en cada detalle:</strong> Piezas elaboradas a mano, con el cuidado y pasión que solo el arte artesanal ofrece.</li>
+                        <li><strong>Para todos los gustos:</strong> Desde diseños modernos hasta clásicos atemporales, siempre con un toque de innovación.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <p class="footer-quote">"No solo vendemos productos, compartimos pedacitos de nuestra creatividad contigo."</p>
+    </section>
+
+    <!-- Sección Productos (scroll horizontal) -->
+    <section id="products" class="products">
+        <h2>Nuestros Productos</h2>
+        <div class="product-scroll" id="product-scroll">
+            <!-- Productos se añadirán dinámicamente con JS -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Fusión Artesanal. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
