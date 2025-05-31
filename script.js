@@ -4,7 +4,7 @@ const productos = [
     id: 1,
     nombre: "Bandeja en cemento",
     descripcion: "Bandejas en cemento de diferentes tamaños y de diferentes colores",
-    precio: 15,
+    precio: 15000,
     imagen: "assets/images/IMG_2244.jpg",
     categoria: "velas"
   },
@@ -12,7 +12,7 @@ const productos = [
     id: 2,
     nombre: "Portavelas Geométrico",
     descripcion: "Base de cemento con diseño minimalista",
-    precio: 35.50,
+    precio: 25000,
     imagen: "assets/images/portavelas.jpg",
     categoria: "accesorios"
   },
@@ -44,17 +44,40 @@ const productos = [
 ];
 
 // Función para mostrar productos - MANTENER ESTA
+// function mostrarProductos() {
+//   const contenedor = document.getElementById('product-scroll');
+//   contenedor.innerHTML = ''; // Limpiar contenedor primero
+  
+//   productos.forEach(producto => {
+//     contenedor.innerHTML += `
+//       <div class="product-card">
+//         <img src="${producto.imagen}" alt="${producto.nombre}">
+//         <h3>${producto.nombre}</h3>
+//         <p>${producto.descripcion}</p>
+//         <p class="price">$${producto.precio.toFixed(2)}</p>
+//       </div>
+//     `;
+//   });
+// }
+
 function mostrarProductos() {
   const contenedor = document.getElementById('product-scroll');
-  contenedor.innerHTML = ''; // Limpiar contenedor primero
+  contenedor.innerHTML = '';
   
   productos.forEach(producto => {
+    // Formatear precio con separador de miles
+    const precioFormateado = new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+      minimumFractionDigits: 0
+    }).format(producto.precio);
+
     contenedor.innerHTML += `
       <div class="product-card">
         <img src="${producto.imagen}" alt="${producto.nombre}">
         <h3>${producto.nombre}</h3>
         <p>${producto.descripcion}</p>
-        <p class="price">$${producto.precio.toFixed(2)}</p>
+        <p class="price">${precioFormateado}</p>
       </div>
     `;
   });
