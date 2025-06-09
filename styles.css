@@ -1,12 +1,16 @@
 /* Importación de fuentes desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+@import url('https://fonts.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+/* Importación de Font Awesome para el ícono del menú (asegúrate de que esta esté en el HTML si solo la usas para el ícono) */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
 
 /* Variables de colores y fuentes */
 :root {
-    --primary: #D23C77;    /* Rosa principal */
-    --secondary: #B399D4;  /* Lila secundario */
-    --white: #FFFFFF;      /* Fondo y texto claro */
-    --black: #333333;      /* Texto oscuro */
+    --primary: #D23C77;/* Rosa principal */
+    --secondary: #B399D4;/* Lila secundario */
+    --white: #FFFFFF;/* Fondo y texto claro */
+    --black: #333333;/* Texto oscuro */
+    --light-bg: #F8F8F8; /* Un color de fondo claro para secciones no-hero */
     --font-title: 'Playfair Display', serif;
     --font-body: 'Montserrat', sans-serif;
 }
@@ -23,28 +27,15 @@ body {
     color: var(--black);
     background-color: var(--white);
     line-height: 1.6;
-
-    /* Opcional de pruebas 
-    
-    font-family: 'Montserrat', sans-serif;
-    background-color: var(--light-bg);
-    color: var(--text-dark);
-    line-height: 1.6;
-    padding: 2rem;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center; */
-
 }
 
 h1, h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-title); /* Usando la variable para consistencia */
     text-align: center;
 }
 
 h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-title);
     color: var(--primary);
     font-size: 2.2rem;
     text-align: center;
@@ -52,7 +43,7 @@ h1 {
 }
         
 h2 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body); /* Usando la variable para consistencia */
     color: var(--secondary);
     font-size: 1.5rem;
     text-align: center;
@@ -61,11 +52,19 @@ h2 {
     letter-spacing: 0.5px;
 }
 
-/* Header */
-/* Importación de Font Awesome para el ícono del menú */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+/* --- Padding entre Título y Sección / Delimitador entre Secciones --- */
+/* Aplicar padding a todas las secciones excepto hero */
+section:not(.hero) {
+    padding: 6rem 2rem; /* Aumenta el padding vertical */
+    border-bottom: 1px solid rgba(179, 153, 212, 0.3); /* Delimitador sutil */
+}
 
-/* Navbar - Estilos generales */
+/* Eliminar el border-bottom de la última sección si es el footer o si hay una sección final sin borde */
+footer {
+    border-bottom: none; /* El footer no necesita borde inferior */
+}
+
+/* Header */
 .header {
     background-color: var(--white);
     position: fixed;
@@ -103,29 +102,67 @@ h2 {
     display: flex;
     gap: 2.5rem; /* Más espacio entre enlaces */
 }
-
 .navbar a {
-    font-family: var(--font-title);
-    font-weight: 600;
-    font-size: 1.5rem; /* Texto más grande */
-    text-decoration: none;
     color: var(--primary);
-    transition: color 0.3s;
+    font-family: var(--font-body);
+    font-size: 1.2rem;
 }
+/* --- REQUERIMIENTO DEL MENÚ HAMBURGUESA: Ocultar el menú completo en desktop --- */
+/* El menú de navegación en sí mismo debe estar oculto por defecto en tamaños móviles y ser mostrado por JavaScript */
+/* Por defecto, el menú está oculto en resoluciones pequeñas y se muestra en desktop */
+@media (max-width: 768px) {
+    .navbar {
+        display: none; /* Oculta el menú de navegación principal por defecto en móviles */
+        position: fixed;
+        top: 80px; /* Ajusta según altura del header */
+        left: -100%; /* Inicia fuera de la pantalla */
+        width: 100%;
+        height: calc(100vh - 80px); /* Altura total menos el header */
+        flex-direction: column;
+        gap: 1.5rem;
+        background-color: var(--white);
+        padding: 2rem;
+        box-shadow: none;
+        transition: left 0.3s ease;
+        z-index: 999; /* Asegura que esté sobre el contenido */
+    }
+
+    .navbar.active {
+        left: 0; /* Muestra el menú cuando tiene la clase 'active' */
+        display: flex; /* Cambia a flex para mostrarlo y organizar los ítems */
+    }
+
+    .navbar a {
+        font-size: 1.5rem;
+        padding: 1rem 0;
+        text-align: center;
+        border-bottom: 1px solid rgba(210, 60, 119, 0.1);
+    }
+}
+
 
 .navbar a:hover {
     color: var(--secondary);
 }
 
-/* Botón del menú hamburguesa (oculto en desktop) */
+/* --- REQUERIMIENTO DEL MENÚ HAMBURGUESA: Mostrar el botón de hamburguesa --- */
 .menu-toggle {
-    display: none;
+    display: none; /* Oculto por defecto en desktop */
     background: none;
     border: none;
     color: var(--primary);
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Tamaño un poco más grande para mejor visibilidad */
     cursor: pointer;
+    z-index: 1001; /* Asegura que esté sobre el navbar cuando se abre */
 }
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Muestra el botón de hamburguesa en móviles y tablets */
+    }
+}
+/* --- FIN REQUERIMIENTO DEL MENÚ HAMBURGUESA --- */
+
 
 /* Hero Section */
 .hero {
@@ -136,6 +173,9 @@ h2 {
     justify-content: center;
     text-align: center;
     color: var(--white);
+    position: relative; /* Necesario para que el ::before funcione */
+    padding: 0;
+    border-bottom: none; /* Asegura que el hero no tenga un border-bottom */
 }
 
 /* Hero Section - Título principal */
@@ -154,7 +194,6 @@ h2 {
     padding: 0 1rem; /* Evita que toque bordes en móviles */
 }
 
-
 /* Overlay oscuro para mejorar legibilidad (sobre imagen) */
 .hero::before {
     content: "";
@@ -167,44 +206,26 @@ h2 {
     z-index: 0;
 }
 
-/* Secciones */
-/* section {
-    padding: 6rem 2rem;
-    min-height: 100vh;
-} */
-
+/* About Section */
 .about-section {
-  max-width: 900px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .flip-container {
     perspective: 1500px;
     width: 100%;
     max-width: 850px; /* Más ancho */
-    /* height: 420px; Más alto */
     height: auto; /* Altura flexible */
     min-height: 420px; /* Altura mínima */
     aspect-ratio: 3/2; /* Proporción mantenida */
     margin: 0 auto 3rem;
     position: relative;
 }
-
-
-/* Flip Card Container */
-
-/* .flip-card-container {
-   perspective: 1200px;
-    width: 100%;
-    max-width: 600px;
-    height: 380px;
-    margin: 0 auto 2rem;
-} */
         
 .flip-card {
     position: relative;
@@ -239,7 +260,7 @@ h2 {
         
 .flip-card-front {
     background-color: var(--white);
-    background-image: url('assets/images/producto-destacado.jpg');
+    background-image: url('assets/images/producto-destacado.jpg'); /* Se usa como fallback si el gradiente falla */
     background-size: cover;
     background-position: center;
     color: var(--white);
@@ -248,7 +269,7 @@ h2 {
     color: var(--white);
     z-index: 2;
 }
-       
+        
 .flip-card-front::before {
     content: '';
     position: absolute;
@@ -272,10 +293,10 @@ h2 {
     border-radius: 10px;
 }
 .flip-card-front p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin: 0;
-}       
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+}        
 .flip-card-back {
     background-color: var(--white);
     transform: rotateY(180deg);
@@ -301,6 +322,7 @@ h2 {
     margin-bottom: 1rem;
     position: relative;
     padding-left: 1.5rem;
+    font-size: 1rem; /* Añadido: Tamaño de fuente por defecto para los ítems de la lista */
 }
         
 .flip-card-back li:before {
@@ -322,36 +344,66 @@ h2 {
     z-index: 0;
 }
 
-/* Productos */
-
-.products {
-    padding: 4rem 2rem;
-    background-color: var(--light-bg);
-}
-.product-scroll {
-    display: flex;
-    overflow-x: auto;
-    gap: 1.5rem;
-    padding: 1.5rem 0;
-    scroll-snap-type: x mandatory;
+/* --- Productos (Carrusel y Cards) --- */
+/* Estilos para la sección completa de productos */
+.product-section { /* CAMBIADO de .product-container para mayor claridad */
+    background-color: var(--light-bg); /* Fondo específico para esta sección */
+    padding: 6rem 2rem; /* Mantener padding general de secciones */
+    border-bottom: 1px solid rgba(179, 153, 212, 0.3); /* Delimitador sutil */
 }
 
+/* Estilos de títulos y subtítulos dentro de la sección de productos */
+.product-section h2 { /* CAMBIADO de .product-container h2 */
+    color: var(--primary);
+    /* Estas propiedades ya existen globalmente para h2, puedes eliminarlas si no necesitas anularlas */
+    font-family: var(--font-title); 
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+.product-section #container-sub { /* CAMBIADO de .product-container #container-sub */
+    color: var(--secondary);
+    font-family: var(--font-body); 
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* Contenedor FLEX para las tarjetas - antes era .product-scroll */
+/* CAMBIADO: Renombrado a .product-grid-wrapper y ajustado para grid responsivo */
+.product-grid-wrapper {
+    display: flex; /* Habilita Flexbox para disposición horizontal */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea si no hay espacio */
+    justify-content: center; /* Centra las cards horizontalmente en el contenedor */
+    gap: 1.5rem; /* Espacio entre las cards */
+    padding: 1.5rem 0; /* Padding interno del contenedor */
+    /* overflow-x: hidden; <-- Esto ya no es necesario si flex-wrap está activo y gestionas bien los anchos */
+    /* scroll-snap-type: none; <-- Esto ya no es necesario si no buscas carrusel */
+}
+
+/* Estilos para cada tarjeta individual */
 .product-card {
-    scroll-snap-align: start;
-    min-width: 250px;
+    flex: 0 0 auto; /* No crecer, no encoger, la base la define el 'width' */
+    width: calc(33.33% - 1.5rem); /* Por defecto, 3 cards por fila con gap */
+    max-width: 300px; /* Tamaño máximo individual de una card para que no crezca demasiado */
+    min-width: 220px; /* Tamaño mínimo para asegurar legibilidad */
     background: var(--white);
     border-radius: 8px;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease;
+    margin-bottom: 1.5rem; /* Espacio entre filas cuando se envuelven */
 }
+
 .product-card:hover {
     transform: translateY(-5px);
 }
 .product-card img {
     width: 100%;
-    height: 350px;
+    height: 200px; /* Altura fija para todas las imágenes de productos */
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 1rem;
@@ -360,78 +412,197 @@ h2 {
     font-family: var(--font-title);
     color: var(--secondary);
     margin: 1rem 0;
+    font-size: 1.2rem; /* Tamaño de fuente más ajustado */
+}
+.product-card p {
+    font-size: 0.95rem; /* Tamaño de fuente para descripción */
+    margin-bottom: 1rem;
 }
 .product-card .price {
-    color: var(--secondary);
-    font-weight: 600;
-    font-size: 1.1rem;
+    color: var(--primary); /* Cambiado a primary para destacarlo más */
+    font-weight: 700; /* Más énfasis */
+    font-size: 1.2rem; /* Tamaño de fuente un poco más grande */
+}
+.product-card button.add-to-cart {
+    background-color: var(--secondary);
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+.product-card button.add-to-cart:hover {
+    background-color: var(--primary);
+}
+/* --- Fin Productos --- */
+
+/* Estilos para el carrito */
+.cart-section {
+    margin: 0 auto; /* Centrar sección */
+    max-width: 900px; /* Limitar ancho */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Sombra suave */
 }
 
-/* Estilos para la sección de contacto */
+.carrito-items {
+    margin-bottom: 20px;
+    padding: 0 10px; /* Pequeño padding interno */
+}
+
+.carrito-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 0.95rem;
+}
+.carrito-item:last-child {
+    border-bottom: none; /* No border en el último item */
+}
+
+.cart-total {
+    text-align: right;
+    font-size: 1.3em; /* Un poco más grande */
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 0 10px; /* Pequeño padding interno */
+}
+
+#proceed-to-checkout, #finalizar-compra {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px; /* Más padding */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em; /* Más grande */
+    margin-top: 25px; /* Más margen */
+    display: block; /* Ocupa todo el ancho disponible */
+    width: calc(100% - 20px); /* Ajuste por el padding de la sección */
+    margin-left: 10px; /* Centrar de forma manual si es necesario */
+    margin-right: 10px;
+}
+
+#proceed-to-checkout:hover, #finalizar-compra:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para el formulario de checkout */
+.checkout-section {
+    margin: 0 auto; /* Centrar sección */
+    max-width: 900px; /* Limitar ancho */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Sombra suave */
+}
+
+.checkout-summary {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 18px; /* Más espacio entre campos */
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 8px; /* Más espacio entre label y input */
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"] {
+    width: 100%;
+    padding: 12px; /* Más padding en inputs */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* --- Contacto (Ajuste para desbordamiento) --- */
 .contacto-section {
-  padding: 3rem 2rem;
-  background-color: var(--light-bg);
+    background-color: var(--light-bg);
 }
 
 .contacto-banner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  border-radius: 16px;
-  padding: 2rem;
-  color: white;
-  box-shadow: 0 8px 24px rgba(210, 60, 119, 0.2);
+    display: flex;
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
+    align-items: center;
+    justify-content: center; /* Centrar contenido cuando se envuelve */
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 16px;
+    padding: 2.5rem; /* Aumenta el padding interno */
+    color: white;
+    box-shadow: 0 8px 24px rgba(210, 60, 119, 0.2);
+    text-align: center; /* Por defecto centrado para móviles */
 }
 
 .banner-texto {
-  flex: 1;
-  min-width: 300px;
-  padding-right: 2rem;
+    flex: 1 1 100%; /* Ocupa el 100% de ancho en resoluciones pequeñas, flexible */
+    min-width: 280px; /* Mínimo para el texto */
+    padding-right: 0; /* Elimina padding derecho si se va a envolver */
+    margin-bottom: 1.5rem; /* Espacio debajo del texto */
+    text-align: center; /* Centra el texto */
 }
 
 .banner-texto h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+    font-family: var(--font-title);
+    font-size: 2rem; /* Tamaño ajustado para visibilidad */
+    margin-bottom: 1rem;
+    color: var(--white); /* Asegurar que el título sea blanco en el banner */
 }
 
 .banner-texto p {
-  font-size: 1.1rem;
-  opacity: 0.9;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px; /* Limita el ancho del párrafo para legibilidad */
+    margin: 0 auto 1.5rem auto; /* Centra el párrafo */
 }
 
 .whatsapp-btn {
-  display: inline-flex;
-  align-items: center;
-  background-color: #25D366; /* Color oficial de WhatsApp */
-  color: white !important;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 0.3s, box-shadow 0.3s;
-  white-space: nowrap;
-  margin: 1rem 0;
+    display: inline-flex; /* Para que el botón se centre y se comporte bien */
+    align-items: center;
+    background-color: #25D366; /* Color oficial de WhatsApp */
+    color: white !important;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    white-space: nowrap;
+    margin: 1rem auto; /* Centrar horizontalmente */
 }
 
 .whatsapp-btn img {
-  width: 24px;
-  height: 24px;
-  margin: 10px;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px; /* Ajustado de margin: 10px; para mejor espaciado */
 }
 
-.fab{
+.fab {
     margin-right: 10px;
 }
 
 .whatsapp-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
+/* --- Fin Contacto --- */
+
 /* Footer */
 .footer {
     text-align: center;
@@ -446,73 +617,92 @@ h2 {
 }
 
 /* Responsive */
-@media (max-width: 480px) {
-  .flip-container {
-    min-height: 320px;
-  }
-  
-  .flip-card-front p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .flip-card-back ul li {
-    font-size: 0.75rem;
-    padding-left: 1.2rem;
-  }
-  
-  .flip-card-back li:before {
-    font-size: 1.2rem;
-    top: -1px;
-  }
-}
-
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.5rem;
-    }
+/* Media query para pantallas más grandes que 768px (desktop) */
+@media (min-width: 769px) {
+    /* Muestra la barra de navegación completa en desktop */
     .navbar {
-        gap: 1rem;
+        display: flex; /* Asegura que el menú sea visible en desktop */
+        position: static; /* Restablece el posicionamiento */
+        top: auto;
+        left: auto;
+        width: auto;
+        height: auto;
+        flex-direction: row; /* Vuelve a ser una fila */
+        background-color: transparent; /* Fondo transparente */
+        padding: 0;
+        box-shadow: none;
+        transition: none; /* Sin transiciones en desktop */
+    }
+    
+    .navbar a {
+        padding: 0; /* Restablece el padding de los enlaces */
+        border-bottom: none; /* Elimina los bordes de los enlaces */
+    }
+
+    /* Oculta el botón de hamburguesa en desktop */
+    .menu-toggle {
+        display: none;
+    }
+
+    /* Revertir cambios específicos para desktop en la sección de contacto */
+    .banner-texto {
+        flex: 1; /* Retoma el flex 1 para ocupar espacio */
+        padding-right: 2rem; /* Vuelve al padding derecho */
+        text-align: left; /* Alinea a la izquierda en desktop */
+        margin-bottom: 0; /* Elimina margen inferior */
+    }
+    .banner-texto p {
+        margin: 0; /* Elimina margen auto para el párrafo */
+    }
+    .whatsapp-btn {
+        margin: 1rem 0; /* Vuelve al margen normal si es necesario */
     }
 }
 
+
+/* Media query para pantallas hasta 480px (móviles muy pequeños) */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem; /* Tamaño más pequeño en móviles muy pequeños */
+    }
+    .flip-container {
+        min-height: 320px;
+    }
+    
+    .flip-card-front p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    
+    .flip-card-back h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .flip-card-back ul li {
+        font-size: 0.75rem;
+        padding-left: 1.2rem;
+    }
+    
+    .flip-card-back li:before {
+        font-size: 1.2rem;
+        top: -1px;
+    }
+
+    /* Disposición de cards para móviles */
+    .product-grid-wrapper { /* Asegura que no haya scroll horizontal en móviles */
+        overflow-x: hidden;
+        width: 100%;
+        min-width: unset; 
+    }
+}
+
+/* Media query para pantallas hasta 768px (tablets y móviles) */
 @media (max-width: 768px) {
     .header-container {
         padding: 1rem; /* Reduce padding en móviles */
     }
 
-    .navbar {
-        position: fixed;
-        top: 80px; /* Ajusta según altura del header */
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 80px); /* Altura total menos el header */
-        flex-direction: column;
-        gap: 1.5rem;
-        background-color: var(--white);
-        padding: 2rem;
-        box-shadow: none; /* Elimina sombra para limpieza */
-        transition: left 0.3s ease;
-    }
-
-    .navbar.active {
-        left: 0;
-    }
-
-    .navbar a {
-        font-size: 1.5rem; /* Texto más grande */
-        padding: 1rem 0;
-        text-align: center; /* Centra el texto */
-        border-bottom: 1px solid rgba(210, 60, 119, 0.1); /* Separador sutil */
-    }
-    .menu-toggle {
-        display: block; /* Muestra el botón */
-    }
     .hero h1 {
         font-size: 2.5rem; /* Tamaño legible en móviles */
         text-shadow: 
@@ -528,7 +718,7 @@ h2 {
         min-height: 350px;
         aspect-ratio: 4/3;
     }
-  
+    
     .flip-card-front-content,
     .flip-card-back {
         padding: 1.5rem;
@@ -540,35 +730,45 @@ h2 {
         padding-left: 1.5rem;
         font-size: 0.9rem;
     }
+
+    /* Disposición de cards para tablets */
+
     .contacto-banner {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .banner-texto {
-    padding-right: 0;
-    margin-bottom: 1.5rem;
-  }
-  
-  .whatsapp-btn {
-    margin: 0 auto;
-  }
+        flex-direction: column; /* Apila los elementos en columnas */
+        text-align: center;
+        padding: 2rem 1.5rem; /* Ajusta el padding para pantallas pequeñas */
+    }
+    
+    .banner-texto {
+        padding-right: 0;
+        margin-bottom: 1.5rem;
+    }
+    
+    .whatsapp-btn {
+        margin: 0 auto; /* Centra el botón en móviles */
+    }
 }
 
+/* Media query para pantallas hasta 1024px (laptops pequeñas y tablets horizontales) */
+/* Este media query define el comportamiento por defecto para 3 cards si no hay un min-width más alto para desktop */
 @media (max-width: 1024px) {
-  .flip-container {
-    min-height: 380px;
-  }
-  
-  .flip-card-front p {
-    font-size: 1rem;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 1.3rem;
-  }
-  
-  .flip-card-back li {
-    font-size: 0.95rem;
-  }
+    .flip-container {
+        min-height: 380px;
+    }
+    
+    .flip-card-front p {
+        font-size: 1rem;
+    }
+    
+    .flip-card-back h3 {
+        font-size: 1.3rem;
+    }
+    
+    .flip-card-back li {
+        font-size: 0.95rem;
+    }
+    /* Disposición de cards para laptops pequeñas/tablets horizontales */
+    .product-card {
+        width: calc(33.33% - 1.5rem); /* Tres cards por fila (disposición horizontal) */
+    }
 }
